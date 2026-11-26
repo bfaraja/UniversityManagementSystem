@@ -357,10 +357,8 @@ private void showStudents() {
     HBox.setHgrow(spacer, Priority.ALWAYS);
 
     Button addButton = createAddButton();
-
-    sectionHeader.getChildren().addAll(
-            heading, spacer, addButton
-    );
+ 
+    sectionHeader.getChildren().addAll(heading, spacer, addButton);
 
     TableView<StudentRow> table = createStudentTable();
     VBox.setVgrow(table, Priority.ALWAYS);
