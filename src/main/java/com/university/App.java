@@ -14,7 +14,8 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
+import javafx.fxml.FXMLLoader;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ public class App extends Application {
 
     private BorderPane root;
     private VBox sidebar;
-
+private StudentController studentController;
     private ObservableList<StudentRow> students =
             FXCollections.observableArrayList();
 
@@ -325,51 +326,51 @@ public class App extends Application {
     }
 
     // STUDENTS PAGE
-    private void showStudents() {
+private void showStudents() {
 
-        updateSidebarSelection("Students");
+    updateSidebarSelection("Students");
 
-        VBox content = new VBox(22);
-        content.setPadding(new Insets(30));
+    VBox content = new VBox(22);
+    content.setPadding(new Insets(30));
 
-        HBox header = createHeader(
-                "Students",
-                "Manage student records"
-        );
+    HBox header = createHeader(
+            "Students",
+            "Manage student records"
+    );
 
-        VBox section = new VBox(15);
-        section.setPadding(new Insets(20));
-        section.setStyle(
-                "-fx-background-color: white;" +
-                "-fx-background-radius: 12;"
-        );
-        VBox.setVgrow(section, Priority.ALWAYS);
+    VBox section = new VBox(15);
+    section.setPadding(new Insets(20));
+    section.setStyle(
+            "-fx-background-color: white;" +
+            "-fx-background-radius: 12;"
+    );
+    VBox.setVgrow(section, Priority.ALWAYS);
 
-        HBox sectionHeader = new HBox(10);
-        sectionHeader.setAlignment(Pos.CENTER_LEFT);
+    HBox sectionHeader = new HBox(10);
+    sectionHeader.setAlignment(Pos.CENTER_LEFT);
 
-        Label heading = new Label("All Students");
-        heading.setFont(Font.font(20));
-        heading.setStyle("-fx-font-weight: bold;");
+    Label heading = new Label("All Students");
+    heading.setFont(Font.font(20));
+    heading.setStyle("-fx-font-weight: bold;");
 
-        Region spacer = new Region();
-        HBox.setHgrow(spacer, Priority.ALWAYS);
+    Region spacer = new Region();
+    HBox.setHgrow(spacer, Priority.ALWAYS);
 
-        Button addButton = createAddButton();
+    Button addButton = createAddButton();
 
-        sectionHeader.getChildren().addAll(
-                heading, spacer, addButton
-        );
+    sectionHeader.getChildren().addAll(
+            heading, spacer, addButton
+    );
 
-        TableView<StudentRow> table = createStudentTable();
-        VBox.setVgrow(table, Priority.ALWAYS);
+    TableView<StudentRow> table = createStudentTable();
+    VBox.setVgrow(table, Priority.ALWAYS);
 
-        section.getChildren().addAll(sectionHeader, table);
+    section.getChildren().addAll(sectionHeader, table);
 
-        content.getChildren().addAll(header, section);
+    content.getChildren().addAll(header, section);
 
-        root.setCenter(content);
-    }
+    root.setCenter(content);
+}
 
     // PROGRAMS PAGE
     private void showPrograms() {
@@ -898,6 +899,9 @@ public class App extends Application {
             publishEvent("StudentAdded");
 
             refreshData();
+            if (studentController != null) {
+    studentController.loadStudents();
+}
         });
 
         task.setOnFailed(event -> {
