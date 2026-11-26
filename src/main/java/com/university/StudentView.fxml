@@ -1,0 +1,40 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="15"
+      xmlns="http://javafx.com/javafx/25"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.university.StudentController">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Student Management"
+           style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+
+    <TableView fx:id="studentTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="idColumn"
+                         text="Student ID"
+                         prefWidth="100"/>
+            <TableColumn fx:id="nameColumn"
+                         text="Full Name"
+                         prefWidth="180"/>
+            <TableColumn fx:id="emailColumn"
+                         text="Email"
+                         prefWidth="200"/>
+            <TableColumn fx:id="programColumn"
+                         text="Program"
+                         prefWidth="180"/>
+            <TableColumn fx:id="statusColumn"
+                         text="Status"
+                         prefWidth="100"/>
+        </columns>
+    </TableView>
+
+</VBox>
